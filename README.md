@@ -1,10 +1,12 @@
-clap
-====
+# clap
 
-[![Crates.io](https://img.shields.io/crates/v/clap.svg)](https://crates.io/crates/clap) [![Crates.io](https://img.shields.io/crates/d/clap.svg)](https://crates.io/crates/clap) [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/clap-rs/clap/blob/master/LICENSE-APACHE) [![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/clap-rs/clap/blob/master/LICENSE-MIT) [![Coverage Status](https://coveralls.io/repos/clap-rs/clap/badge.svg?branch=master&service=github)](https://coveralls.io/github/clap-rs/clap?branch=master) [![Join the chat at https://gitter.im/clap-rs/clap](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/clap-rs/clap)
-
-Linux: [![Build Status](https://travis-ci.org/clap-rs/clap.svg?branch=master)](https://travis-ci.org/clap-rs/clap)
-Windows: [![Build Status](https://dev.azure.com/clap-rs/clap/_apis/build/status/clap-rs.clap?branchName=master)](https://dev.azure.com/clap-rs/clap/_build/latest?definitionId=1&branchName=master)
+[![Crates.io](https://img.shields.io/crates/v/clap?style=flat-square)](https://crates.io/crates/clap)
+[![Crates.io](https://img.shields.io/crates/d/clap?style=flat-square)](https://crates.io/crates/clap)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](https://github.com/clap-rs/clap/blob/master/LICENSE-APACHE)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/clap-rs/clap/blob/master/LICENSE-MIT)
+[![Coverage Status](https://img.shields.io/coveralls/github/clap-rs/clap/master?style=flat-square)](https://coveralls.io/github/clap-rs/clap?branch=master)
+[![Linux Build Status](https://img.shields.io/travis/clap-rs/clap/master?style=flat-square&logo=linux&logoColor=fff)](https://travis-ci.org/clap-rs/clap)
+[![Windows Build Status](https://img.shields.io/azure-devops/build/clap-rs/3b9343e1-29b0-47be-acec-1edcdab69de9/1/master?style=flat-square&logo=windows)](https://dev.azure.com/clap-rs/clap/_build/latest?definitionId=1&branchName=master)
 
 Command Line Argument Parser for Rust
 
@@ -12,16 +14,8 @@ It is a simple-to-use, efficient, and full-featured library for parsing command 
 
 * [documentation](https://docs.rs/clap/)
 * [website](https://clap.rs/)
-* [video tutorials](https://www.youtube.com/playlist?list=PLza5oFLQGTl2Z5T8g1pRkIynR3E0_pc7U)
 
-> **IMPORTANT!**
-> This readme describes `clap v3.0.0` which is still under development and will be published soon-ish. 
-> It was not published on crates.io yet, and if you want to use this preview anyway, use 
-> ```toml,no_sync
-> clap = { git = "https://github.com/clap-rs/clap/" }
-> ```
-> 
-> If you're looking for the readme for `clap v2.33` - find it on [github](https://github.com/clap-rs/clap/tree/v2.33.0), [crates.io](https://crates.io/crates/clap/2.33.0), [docs.rs](https://docs.rs/clap/2.33.0/clap/).
+> If you're looking for the readme & examples for `clap v2.33` - find it on [github](https://github.com/clap-rs/clap/tree/v2.33.0), [crates.io](https://crates.io/crates/clap/2.33.0), [docs.rs](https://docs.rs/clap/2.33.0/clap/).
 
 
 Table of Contents
