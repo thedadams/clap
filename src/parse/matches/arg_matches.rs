@@ -1,7 +1,7 @@
 // Std
 use std::borrow::Cow;
 use std::ffi::{OsStr, OsString};
-use std::fmt::Display;
+use std::fmt::{Debug, Display};
 use std::iter::{Cloned, Map};
 use std::slice::Iter;
 use std::str::FromStr;
@@ -12,7 +12,7 @@ use indexmap::IndexMap;
 // Internal
 use crate::parse::{MatchedArg, SubCommand};
 use crate::util::{Id, Key};
-use crate::{Error, INVALID_UTF8};
+use crate::{Error, INTERNAL_ERROR_MSG, INVALID_UTF8};
 
 /// Used to get information about the arguments that were supplied to the program at runtime by
 /// the user. New instances of this struct are obtained by using the [`App::get_matches`] family of
@@ -331,17 +331,21 @@ impl ArgMatches {
     pub fn value_of_t<R>(&self, name: &str) -> Result<R, Error>
     where
         R: FromStr,
-        <R as FromStr>::Err: Display,
+        <R as FromStr>::Err: Display + Debug,
     {
         if let Some(v) = self.value_of(name) {
-            v.parse::<R>().map_err(|e| {
-                Error::value_validation_auto(&format!(
+            let parsed = v.parse::<R>();
+
+            if let Err(e) = parsed {
+                Err(Error::value_validation_auto(&format!(
                     "The argument '{}' isn't a valid value: {}",
                     v, e
-                ))
-            })
+                ))?)
+            } else {
+                Ok(parsed.expect(INTERNAL_ERROR_MSG))
+            }
         } else {
-            Err(Error::argument_not_found_auto(name))
+            Err(Error::argument_not_found_auto(name)?)
         }
     }
 
@@ -378,7 +382,7 @@ impl ArgMatches {
     pub fn value_of_t_or_exit<R>(&self, name: &str) -> R
     where
         R: FromStr,
-        <R as FromStr>::Err: Display,
+        <R as FromStr>::Err: Display + Debug,
     {
         self.value_of_t(name).unwrap_or_else(|e| e.exit())
     }
@@ -416,20 +420,24 @@ impl ArgMatches {
     pub fn values_of_t<R>(&self, name: &str) -> Result<Vec<R>, Error>
     where
         R: FromStr,
-        <R as FromStr>::Err: Display,
+        <R as FromStr>::Err: Display + Debug,
     {
         if let Some(vals) = self.values_of(name) {
             vals.map(|v| {
-                v.parse::<R>().map_err(|e| {
-                    Error::value_validation_auto(&format!(
+                let parsed = v.parse::<R>();
+
+                if let Err(e) = parsed {
+                    Err(Error::value_validation_auto(&format!(
                         "The argument '{}' isn't a valid value: {}",
                         v, e
-                    ))
-                })
+                    ))?)
+                } else {
+                    Ok(parsed.expect(INTERNAL_ERROR_MSG))
+                }
             })
             .collect()
         } else {
-            Err(Error::argument_not_found_auto(name))
+            Err(Error::argument_not_found_auto(name)?)
         }
     }
 
@@ -466,7 +474,7 @@ impl ArgMatches {
     pub fn values_of_t_or_exit<R>(&self, name: &str) -> Vec<R>
     where
         R: FromStr,
-        <R as FromStr>::Err: Display,
+        <R as FromStr>::Err: Display + Debug,
     {
         self.values_of_t(name).unwrap_or_else(|e| e.exit())
     }
